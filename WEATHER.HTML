@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weather Application</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+/* ========== GLOBAL ========== */
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg,#1e3c72,#2a5298);
+  color: white;
+}
+
+.center {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.hidden {
+  display: none;
+}
+
+.animate {
+  animation: fadeSlide 0.8s ease;
+}
+
+@keyframes fadeSlide {
+  from { opacity:0; transform: translateY(30px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* ========== NAVBAR ========== */
+nav {
+  display:flex;
+  gap:20px;
+  padding:15px;
+  background: rgba(0,0,0,0.3);
+}
+
+nav a {
+  color:white;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+/* ========== CARDS ========== */
+.card {
+  background: rgba(255,255,255,0.15);
+  padding:2rem;
+  border-radius:15px;
+  text-align:center;
+  width:300px;
+}
+
+button {
+  background:#ff9800;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+  color:white;
+  cursor:pointer;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+input {
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border:none;
+  border-radius:8px;
+}
+
+/* ========== DASHBOARD ========== */
+.container {
+  padding:40px;
+}
+
+.info-cards {
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  gap:15px;
+  margin:20px 0;
+}
+
+.info {
+  background: rgba(255,255,255,0.2);
+  padding:1rem;
+  border-radius:12px;
+  text-align:center;
+}
+
+/* ========== WEATHER ========== */
+.app {
+  max-width:420px;
+  margin:40px auto;
+  background: rgba(255,255,255,0.15);
+  padding:2rem;
+  border-radius:20px;
+}
+
+.search {
+  display:flex;
+  gap:10px;
+}
+
+.search input {
+  flex:1;
+}
+
+.loader {
+  display:none;
+  margin:20px auto;
+  width:40px;
+  height:40px;
+  border:4px solid rgba(255,255,255,0.3);
+  border-top:4px solid #ff9800;
+  border-radius:50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.weather {
+  display:none;
+  text-align:center;
+}
+
+.temp {
+  font-size:3rem;
+}
+
+.details {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.detail-card {
+  background: rgba(255,255,255,0.2);
+  padding:1rem;
+  border-radius:10px;
+  animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0.8); opacity:0; }
+  to { transform: scale(1); opacity:1; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ========== LOGIN PAGE ========== -->
+<section id="login" class="center animate">
+  <div class="card">
+    <h2>Login</h2>
+    <input placeholder="Username">
+    <input type="password" placeholder="Password">
+    <button onclick="showDashboard()">Login</button>
+  </div>
+</section>
+
+<!-- ========== DASHBOARD PAGE ========== -->
+<section id="dashboard" class="hidden animate">
+  <nav>
+    <a onclick="showDashboard()">Home</a>
+    <a onclick="showWeather()">Weather</a>
+    <a onclick="logout()">Logout</a>
+  </nav>
+
+  <div class="container">
+    <h1>Dashboard</h1>
+    <p>Welcome to the Weather Application.</p>
+
+    <div class="info-cards">
+      <div class="info">🌦️ Live Weather</div>
+      <div class="info">🌍 Pan-India Coverage</div>
+      <div class="info">⚡ Fast API</div>
+    </div>
+
+    <button onclick="showWeather()">Check Weather</button>
+  </div>
+</section>
+
+<!-- ========== WEATHER PAGE ========== -->
+<section id="weatherPage" class="hidden animate">
+  <nav>
+    <a onclick="showDashboard()">Home</a>
+    <a onclick="showWeather()">Weather</a>
+    <a onclick="logout()">Logout</a>
+  </nav>
+
+  <div class="app">
+    <h2>Weather</h2>
+
+    <div class="search">
+      <input id="city" placeholder="City / Village / PIN Code">
+      <button onclick="getWeather()">Search</button>
+    </div>
+
+    <div class="loader" id="loader"></div>
+
+    <div class="weather" id="weather">
+      <h3 id="location"></h3>
+      <div class="temp" id="temperature"></div>
+
+      <div class="details">
+        <div class="detail-card">🌬️ Wind <br><span id="wind"></span></div>
+        <div class="detail-card">☁️ Code <br><span id="code"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== THANK YOU PAGE ========== -->
+<section id="thankyou" class="center hidden animate">
+  <div class="card">
+    <h1>Thank You 🙏</h1>
+    <p>You have logged out successfully.</p>
+    <button onclick="showLogin()">Login Again</button>
+  </div>
+</section>
+
+<script>
+function hideAll() {
+  document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
+}
+
+function showLogin() {
+  hideAll();
+  document.getElementById("login").classList.remove("hidden");
+}
+
+function showDashboard() {
+  hideAll();
+  document.getElementById("dashboard").classList.remove("hidden");
+}
+
+function showWeather() {
+  hideAll();
+  document.getElementById("weatherPage").classList.remove("hidden");
+}
+
+function logout() {
+  hideAll();
+  document.getElementById("thankyou").classList.remove("hidden");
+}
+
+/* ===== WEATHER API ===== */
+async function getWeather() {
+  const place = document.getElementById("city").value;
+  if (!place) return alert("Enter location");
+
+  document.getElementById("loader").style.display = "block";
+  document.getElementById("weather").style.display = "none";
+
+  const geoRes = await fetch(
+    `https://nominatim.openstreetmap.org/search?format=json&q=${place}, India`
+  );
+  const geoData = await geoRes.json();
+
+  if (!geoData.length) {
+    document.getElementById("loader").style.display = "none";
+    return alert("Location not found");
+  }
+
+  const lat = geoData[0].lat;
+  const lon = geoData[0].lon;
+
+  const weatherRes = await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`
+  );
+  const data = await weatherRes.json();
+  const w = data.current_weather;
+
+  document.getElementById("location").innerText = geoData[0].display_name;
+  document.getElementById("temperature").innerText = w.temperature + "°C";
+  document.getElementById("wind").innerText = w.windspeed + " km/h";
+  document.getElementById("code").innerText = w.weathercode;
+
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("weather").style.display = "block";
+}
+</script>
+
+</body>
+</html>
