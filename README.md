@@ -195,6 +195,8 @@ This project demonstrates real-world API integration using modern JavaScript (fe
 
 <img width="1919" height="1005" alt="Image" src="https://github.com/user-attachments/assets/335c1c37-6faf-4774-8ea9-7bc7c3e256b2" />
 
+<img width="1919" height="1006" alt="Image" src="https://github.com/user-attachments/assets/f94214ef-e2a8-4eec-ae41-a74456b2b5db" />
+
 
 
 
