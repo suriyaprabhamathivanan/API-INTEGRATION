@@ -169,4 +169,8 @@ const data = await weatherRes.json();
 This project demonstrates real-world API integration using modern JavaScript (fetch, async/await) and provides accurate, real-time weather data with a clean and user-friendly interface.
 
 
+**OUTPUT**
+
+<img width="1918" height="1006" alt="Image" src="https://github.com/user-attachments/assets/bfebac4b-759a-461e-87c7-6f0c0eb359e7" />
+
 
