@@ -21,6 +21,7 @@ This Weather Application is a responsive web-based project that allows users to 
 The application integrates free and reliable public APIs to fetch geolocation and live weather data without requiring an API key.
 
 **Objectives:**
+
 To fetch real-time weather data using APIs
 
 To demonstrate API integration using JavaScript
@@ -28,6 +29,7 @@ To demonstrate API integration using JavaScript
 To build a clean, responsive, and animated user interface
 
 To deploy a frontend project using GitHub Pages
+
 
 **Tools & Technologies Used:**
 
@@ -59,7 +61,7 @@ Uses fetch() API with async/await
 Fully runs in the browser
 
 
-**APIs Used**
+**APIs Used:**
 
 1️⃣ OpenStreetMap Nominatim API (Geocoding)
 
@@ -119,7 +121,7 @@ windspeed – Wind speed (km/h)
 weathercode – Weather condition code
 
 
-**API Workflow**
+**API Workflow:**
 
 1. User enters location (City / Village / PIN Code)
 
@@ -141,7 +143,7 @@ weathercode – Weather condition code
 
 
 
- **JavaScript Integration Example**
+ **JavaScript Integration Example:**
  
 const geoRes = await fetch(
   `https://nominatim.openstreetmap.org/search?format=json&q=${place}, India`
@@ -154,7 +156,7 @@ const weatherRes = await fetch(
 const data = await weatherRes.json();
 
 
- **Features Enabled by API Integration**
+ **Features Enabled by API Integration:**
 
 1. Location-based weather search
 
@@ -169,7 +171,7 @@ const data = await weatherRes.json();
 6. Smooth UI transitions
 
 
-**API Notes**
+**API Notes:**
 
 1.No authentication or API key required
 
@@ -180,12 +182,12 @@ const data = await weatherRes.json();
 4.Internet connection required for live data
 
 
-**Conclusion**
+**Conclusion:**
 
 This project demonstrates real-world API integration using modern JavaScript (fetch, async/await) and provides accurate, real-time weather data with a clean and user-friendly interface.
 
 
-**OUTPUT**
+**OUTPUT:**
 
 <img width="1918" height="1006" alt="Image" src="https://github.com/user-attachments/assets/bfebac4b-759a-461e-87c7-6f0c0eb359e7" />
 
