@@ -15,33 +15,49 @@ MENTOR: NEELA SANTHOSH
 
 **WEATHER APPLICATION  – API INTEGRATION**
 
-**Overview**
+**Overview:**
 
 This Weather Application is a responsive web-based project that allows users to search for real-time weather information for any city, village, or PIN code in India.
 The application integrates free and reliable public APIs to fetch geolocation and live weather data without requiring an API key.
 
-**Objectives**
+**Objectives:**
 To fetch real-time weather data using APIs
+
 To demonstrate API integration using JavaScript
+
 To build a clean, responsive, and animated user interface
+
 To deploy a frontend project using GitHub Pages
 
-**Tools & Technologies Used**
+**Tools & Technologies Used:**
+
 Programming Languages:
+
 HTML5 – Structure of the web pages
+
 CSS3 – Styling, layout, animations, and responsiveness
+
 JavaScript (ES6) – Logic, API integration, and DOM manipulation
 
-**Development Tools**
+
+**Development Tools:**
+
 Visual Studio Code (VS Code) – Code editor
+
 Git – Version control system
+
 GitHub – Repository hosting and collaboration
 
-**Application Architecture**
+**Application Architecture:**
+
 Frontend-only application
+
 No backend or database required
+
 Uses fetch() API with async/await
+
 Fully runs in the browser
+
 
 **APIs Used**
 
